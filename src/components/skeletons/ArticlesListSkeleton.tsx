@@ -4,12 +4,6 @@ const ArticleItemSkeleton = () => {
   );
 };
 
-const TagsListSkeleton = () => {
-  return (
-    <div className="w-full h-full rounded-lg bg-gray-200 transition ease-in-out border-2" />
-  );
-};
-
 const ArticleListSkeleton = () => {
   return (
     <div className="flex flex-row w-full max-w-[1122px] h-full gap-[120px]">

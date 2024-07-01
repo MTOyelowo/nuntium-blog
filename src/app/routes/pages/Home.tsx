@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import EditorsPick from "../../../components/home/EditorsPick";
 import Featured from "../../../components/home/Featured";
 
@@ -12,7 +12,7 @@ import Separator from "../../../components/common/Separator";
 interface Props {}
 
 const Home: FC<Props> = (): JSX.Element => {
-  const [page, setPage] = useState(1);
+  const page = 1;
   const limit = 10;
   const { data: posts, error, isLoading } = usePosts(page, limit);
 

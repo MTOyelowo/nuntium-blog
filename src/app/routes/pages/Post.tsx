@@ -14,11 +14,7 @@ const Post: FC<Props> = (): JSX.Element => {
   const limit = 100;
 
   const { id } = useParams<{ id: string }>();
-  const {
-    data: posts,
-    error: postsError,
-    isLoading: postsLoading,
-  } = usePosts(page, limit);
+  const { data: posts } = usePosts(page, limit);
   const {
     data: currentPost,
     error: postError,
