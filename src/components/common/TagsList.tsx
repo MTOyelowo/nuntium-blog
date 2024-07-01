@@ -32,9 +32,9 @@ const TagsList: FC<Props> = (): JSX.Element => {
   return (
     <div className="flex flex-col gap-[3px]">
       <h1 className="font-bold text-xl">tags</h1>
-      <ul className="flex flex-col gap-4 text-base text-primary">
+      <ul className="flex flex-row flex-wrap lg:flex-col gap-4 text-base text-primary">
         {tags.map((item, index) => (
-          <li key={index}>
+          <li key={index} className="">
             <a href={item.href}>{item.name}</a>
           </li>
         ))}

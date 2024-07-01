@@ -1,40 +1,57 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import EditorsPick from "../../../components/home/EditorsPick";
 import Featured from "../../../components/home/Featured";
-import { IArticleProps } from "../../types/ArticleProps";
+
 import ArticlesList from "../../../components/home/ArticlesList";
+import { usePosts } from "../../hooks/usePosts";
+import HeroSkeleton from "../../../components/skeletons/HeroSkeleton";
+import EditorsPickSkeleton from "../../../components/skeletons/EditorPicksSkeleton";
+import ArticleListSkeleton from "../../../components/skeletons/ArticlesListSkeleton";
+import Separator from "../../../components/common/Separator";
 
 interface Props {}
 
-const featured: IArticleProps = {
-  slug: "worlds-most-dangerous-technology-ever-made",
-  author: "Ralph Hawkins",
-  category: "FEATURED ARTICLE",
-  date: new Date(),
-  content:
-    "Proident aliquip velit qui commodo officia qui consectetur dolor ullamco aliquip elit incididunt. Ea minim ex consectetur excepteur. Ex laborum nostrud mollit sint consectetur Lorem amet aliqua do enim. Commodo duis dolor anim excepteur. In aliquip mollit nulla consequat velit magna.",
-  readTime: "10",
-  title: "World’s Most Dangerous Technology Ever Made.",
-  thumbnail:
-    "https://cdn.pixabay.com/photo/2023/06/22/16/34/campfire-8081877_1280.jpg",
-};
-
 const Home: FC<Props> = (): JSX.Element => {
+  const [page, setPage] = useState(1);
+  const limit = 10;
+  const { data: posts, error, isLoading } = usePosts(page, limit);
+
   return (
-    <>
+    <main className="px-[25px]">
       <section>
-        <Featured article={featured} position="-top-[1px] left-[45px]" />
+        {isLoading ? <HeroSkeleton /> : null}
+
+        {!isLoading && !error && posts ? (
+          <Featured
+            article={posts[0]}
+            position="lg:-top-[1px] lg:left-[45px]"
+          />
+        ) : null}
       </section>
-      <section className="mx-auto">
-        <EditorsPick />
+
+      <section className="flex items-center justify-center mx-auto mt-[50px]">
+        {isLoading ? <EditorsPickSkeleton /> : null}
+
+        {!isLoading && !error && posts ? (
+          <EditorsPick editorPicks={posts.slice(0, 4)} />
+        ) : null}
       </section>
-      <section>
-        <Featured article={featured} position="top-[54px] right-[78px]" />
+      <Separator />
+      <section className="mt-[62px]">
+        {isLoading ? <HeroSkeleton /> : null}
+
+        {!isLoading && !error && posts ? (
+          <Featured article={posts[1]} position="top-[54px] right-[78px]" />
+        ) : null}
       </section>
-      <section className="mx-auto mt-9">
-        <ArticlesList />
+      <Separator />
+      <section className="flex items-center justify-center mx-auto mt-[94px] mb-[76px]">
+        {isLoading ? <ArticleListSkeleton /> : null}
+        {!isLoading && !error && posts ? (
+          <ArticlesList articles={posts.slice(0, 4)} />
+        ) : null}
       </section>
-    </>
+    </main>
   );
 };
 

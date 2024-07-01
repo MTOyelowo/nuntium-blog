@@ -3,7 +3,7 @@ import router from "./app/routes";
 
 function App() {
   return (
-    <div className="my-[31px] mx-[25px] gap-[43]">
+    <div className=" mt-4 lg:mt-[31px]">
       <RouterProvider router={router} />
     </div>
   );

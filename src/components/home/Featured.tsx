@@ -1,24 +1,27 @@
 import { FC } from "react";
 import ArticleDetails from "../common/ArticleDetails";
-import { IArticleProps } from "../../app/types/ArticleProps";
 import { Link } from "react-router-dom";
+import { TransformedPost } from "../../app/utils/transformPosts";
 
 interface Props {
-  article: IArticleProps;
+  article: TransformedPost;
   position: string;
 }
 
 const Featured: FC<Props> = ({ article, position }): JSX.Element => {
   return (
-    <div className="relative">
-      <Link to={`/post/${article.slug}`}>
+    <div className="">
+      <Link
+        to={`/post/${article.id}`}
+        className="flex flex-col w-full lg:relative gap-5 lg:gap-0"
+      >
         <img
           src={article.thumbnail}
           alt="Article Image"
-          className="w-full aspect-video lg:aspect-auto lg:h-[592px]"
+          className="w-full aspect-video lg:h-[592px]"
         />
         <div
-          className={`bg-main flex w-[509px] h-[483px] px-10 items-center justify-center absolute ${position}`}
+          className={`bg-main flex w-full lg:w-[509px] lg:h-[483px] lg:px-10 items-center justify-center lg:absolute ${position}`}
         >
           <ArticleDetails withThumbnail={false} article={article} />
         </div>
